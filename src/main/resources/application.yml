@@ -1,0 +1,24 @@
+server:
+  port: 8004
+spring:
+  application:
+    name: eureka-zuul
+eureka:
+  instance:
+    hostname: localhost:8001
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}/eureka/
+    registry-fetch-interval-seconds: 30
+    fetch-registry: true
+zuul:
+  routes:
+    home:
+      path: /home/**
+      serviceId: eureka-home
+    oauth:
+      path: /oauth/**
+      serviceId: marriage-auth
